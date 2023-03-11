@@ -1,4 +1,4 @@
-from main import db
+from app import db
 
 class FinanceAgreement(db.Model):
     __tablename__ = 'finance_agreements'
@@ -9,5 +9,5 @@ class FinanceAgreement(db.Model):
     total_amount = db.Column(db.Float, nullable=False)
     
     # Define relationships
-    invoice = db.relationship('Invoice', backref='finance_agreements_invoice')
-    product = db.relationship('Product', backref='finance_agreements_product')
+    invoice = db.relationship('Invoice', backref='finance_agreements')
+    product = db.relationship('Product', backref='finance_agreements')

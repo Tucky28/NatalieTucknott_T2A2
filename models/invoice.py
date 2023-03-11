@@ -1,4 +1,4 @@
-from main import db
+from app import db
 
 class Invoice(db.Model):
     __tablename__ = 'invoices'
@@ -9,4 +9,4 @@ class Invoice(db.Model):
     supplier_name = db.Column(db.String(255), nullable=False)
 
     # Define relationships
-    business = db.relationship('Business', backref='invoices_business'('finance_agreements', lazy=True))
+    business = db.relationship('Business', backref='invoices', lazy = True)
