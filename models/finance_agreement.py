@@ -1,4 +1,4 @@
-from app import db
+from main import db
 
 class FinanceAgreement(db.Model):
     __tablename__ = 'finance_agreements'

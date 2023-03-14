@@ -1,5 +1,5 @@
-from app import db
-from app import bcrypt
+from main import db
+from main import bcrypt
 from flask import Blueprint
 from models.credit_tiers import CreditTier
 from models.business import Business
@@ -71,13 +71,23 @@ def seed_db():
 
     # Create products
     products = [
-        Product(repayment_term=3, fee=100.0, installment_term=1, product_credit_tier=credit_tier_1.id),
-        Product(repayment_term=24, fee=150.0, installment_term=2, product_credit_tier=credit_tier_2.id),
-        Product(repayment_term=36, fee=200.0, installment_term=3, product_credit_tier=credit_tier_3.id),
+        Product(repayment_term=3, fee=4.0, installment_term=1, product_credit_tier=credit_tier_1.id),
+        Product(repayment_term=24, fee=6.0, installment_term=2, product_credit_tier=credit_tier_2.id),
+        Product(repayment_term=36, fee=8.0, installment_term=3, product_credit_tier=credit_tier_3.id),
     ]
     for product in products:
         db.session.add(product)
         db.session.commit()
-    
+
+    # Create invoices
+    invoices = [
+        Invoice(business_id=businesses[0].id, due_date=datetime.date(2022, 3, 31), amount=2500.56, supplier_name='Supplier A'),
+        Invoice(business_id=businesses[1].id, due_date=datetime.date(2022, 4, 30), amount=5000.99, supplier_name='Supplier B'),
+        Invoice(business_id=businesses[2].id, due_date=datetime.date(2022, 5, 31), amount=7500.34, supplier_name='Supplier C')
+    ]
+
+    for invoice in invoices:
+        db.session.add(invoice)
+        db.session.commit()
     print("Tables seeded")
     
